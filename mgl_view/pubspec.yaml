@@ -1,8 +1,8 @@
 name: mgl_view
 description: A  Flutter package to create tradition mongolion textview.
 version: 0.0.1
-author: suye <454913102@qq.com>
-homepage: https://github.com/suyie001/mgl_view
+author: suye <suyie001@gmail.com>
+homepage: https://github.com/suyie001/mgl_view/tree/master/mgl_view
 
 environment:
   sdk: ">=2.0.0-dev.68.0 <3.0.0"
