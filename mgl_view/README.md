@@ -39,7 +39,7 @@ example:
 
 
 
-[![img](https://github.com/suyie001/mgl_view/blob/master/mgl_view/mgl_view.png)](https://github.com/suyie001/mgl_view/blob/master/mgl_view/mgl_view.png)
+[![img](https://github.com/suyie001/mgl_view/blob/master/mgl_view/mgl_view2.png)](https://github.com/suyie001/mgl_view/blob/master/mgl_view/mgl_view2.png)
 
 # ✨✨ 支持的对齐方式
 
