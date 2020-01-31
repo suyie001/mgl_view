@@ -1,134 +1,166 @@
 library mgl_view;
 
-import 'mgl_text.dart';
+
+
+
 import 'package:flutter/material.dart';
-
-class MView extends StatefulWidget {
-  MView(
-    this.child, {
-    this.height,
-    this.width,
-    this.fontSize,
-    this.color,
-    this.fontWeight,
-    this.spacing,
-  });
-  final double height;
-  final double width;
+enum AlignType {topCenter,topLeft,topRight}
+class MView extends StatelessWidget {
+  MView(this.child,{
+    this.textStyle,
+    this.alignment
+});
+  final AlignType alignment;
   final String child;
-  final FontWeight fontWeight;
-  final double fontSize;
-  final Color color;
-  final double spacing;
-  @override
-  _MViewState createState() => _MViewState();
-}
-
-class _MViewState extends State<MView> {
-  List<String> _list;
-  List<Widget> _mList = List();
-
-  @override
-  void initState() {
-    super.initState();
-    setState(() {
-      _list = widget.child.split(' ');
-    });
-
-    initial();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    _mList.clear();
-  }
-
+  final TextStyle textStyle ;
   @override
   Widget build(BuildContext context) {
-//    initial();
+   return LayoutBuilder(
+     builder: (BuildContext context,BoxConstraints constraints){
+       return Container(
+         width: double.infinity,
+         height: double.infinity,
+         child: RotatedBox(
+           quarterTurns:1,
+           child: CustomPaint(
 
-    return Container(
-      width: widget.width == null
-          ? MediaQuery.of(context).size.width
-          : widget.width,
-      height: widget.height == null
-          ? MediaQuery.of(context).size.height
-          : widget.height,
-      //color: Colors.blueAccent,
-      child: LayoutBuilder(
-        builder: (BuildContext context, size) {
-          return MyTransform(
-            mList: _mList,
-            width: widget.width == null ? size.maxWidth : widget.width,
-            height:
-                widget.height == null ? size.minHeight + 2.0 : widget.height,
-          );
-        },
-      ),
-    );
+             painter: MTextPainter(
+               alignment: alignment,
+               content: child,
+               textStyle:textStyle?? TextStyle(
+                   color: Colors.black,
+                   fontSize: 20,
+                   letterSpacing: 4,
+                   fontFamily: 'Menk Hawang Tig',
+                   wordSpacing: 4) ,
+             ),
+           ),
+         ),
+       );
+     },
+   );
+
   }
+}
 
-  initial() {
-    print(_list);
-    setState(() {
-      for (var i = 0; i < _list.length; i++) {
-        _mList.insert(
-            i,
-            MT(
-              child: _list[i],
-              fontSize: widget.fontSize,
-              fontWeight: widget.fontWeight == null
-                  ? FontWeight.normal
-                  : widget.fontWeight,
-              color: widget.color,
-              spacing: widget.spacing,
-            ));
+class MTextPainter extends CustomPainter {
+  MTextPainter({
+    @required this.content,
+    @required this.textStyle,
+    this.alignment = AlignType.topLeft
+});
+  final String content;
+  final TextStyle textStyle;
+  final AlignType alignment;
+
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    List<Offset> Offsets = [];
+    print('size: $size');
+    List text = content.split(' ');
+   // String text = content;
+    var paint = new Paint();
+    paint.color = textStyle.color;
+    double offsetX = 0;
+    double offsetY = size.height;
+
+    bool newLine = true;
+    double paragraphWidth = 0;
+    double paragraphHeight = 0;
+    int paragraphLine = 1;
+    double maxWidth = 0;
+
+
+    maxWidth = findMaxWidth(content, textStyle);
+
+    for (int i = 0; i < text.length; i++) {
+
+      TextSpan span = new TextSpan(style: textStyle, text: text[i]);
+      TextPainter tp = new TextPainter(
+          text: span,
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.ltr);
+      tp.layout();
+
+
+      if (offsetX + tp.width > size.width) { // 如果一列不够一个文字，就新起一列。
+        newLine = true;
+        offsetX = 0; // 如果是新起一列，y 从0 开始
+        paragraphWidth += tp.height;
+        paragraphLine ++;
+
+        print('paragraphHeight :$paragraphHeight');
       }
-    });
+
+      if (newLine) {
+        offsetY -= maxWidth;
+        newLine = false;
+      }
+
+
+      if (offsetY < -maxWidth) {
+        break; // 如果超出左边边界，不绘制。
+      }
+
+      //tp.paint(canvas, new Offset(offsetX, offsetY));
+      Offsets.add(Offset(offsetX, offsetY));
+      offsetX += tp.width;
+    }
+    for(int i = 0; i < text.length; i++){
+      TextSpan span = new TextSpan(style: textStyle, text: text[i]);
+      TextPainter tp = new TextPainter(
+          text: span,
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.ltr);
+      tp.layout();
+      double x = (size.height-paragraphLine*maxWidth)/2;
+      double y = (size.width - paragraphHeight)/2;
+      print('x:$x');
+      print('y:$y');
+      print('paragraphHeight:$paragraphHeight');
+      if(alignment ==AlignType.topCenter){
+        tp.paint(canvas, Offset(Offsets[i].dx,Offsets[i].dy-x)); //topCenter
+      }else if(alignment ==AlignType.topLeft){
+        tp.paint(canvas, Offsets[i]); //topLeft
+      }else if(alignment ==AlignType.topRight){
+        tp.paint(canvas, Offset(Offsets[i].dx,Offsets[i].dy-2*x));//topRight
+      }
+
+
+
+
+    }
+
   }
-}
+  double findMaxWidth(String text, TextStyle style) {
+    double maxWidth = 0;
+    for (int i = 0; i < text.length; i++) {
+      TextSpan span = new TextSpan(style: textStyle, text: text[i]);
+      TextPainter tp = new TextPainter(
+          text: span,
+          textAlign: TextAlign.center,
+          textDirection: TextDirection.ltr);
+      tp.layout();
+      maxWidth = max(maxWidth, tp.height);
+      print('maxWidth：$maxWidth');
+    }
 
-class MyTransform extends StatelessWidget {
-  const MyTransform({
-    Key key,
-    @required this.width,
-    @required this.height,
-    @required List<Widget> mList,
-  })  : _mList = mList,
-        super(key: key);
 
-  final width;
-  final height;
-
-  final List<Widget> _mList;
+    return maxWidth;
+  }
 
   @override
-  Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Positioned(
-          top: -width,
-          child: Container(
-            color: Colors.red,
-            height: width,
-            width: height,
-            constraints: BoxConstraints(),
-            child: Transform.rotate(
-                alignment: Alignment.bottomLeft,
-                angle: 90 * 3.1415927 / 180,
-                child: _mList == null
-                    ? SizedBox(
-                        width: 0.0,
-                        height: 0.0,
-                      )
-                    : Wrap(
-                        verticalDirection: VerticalDirection.up,
-                        children: _mList,
-                      )),
-          ),
-        ),
-      ],
-    );
+  bool shouldRepaint(CustomPainter oldDelegate) {
+
+    return oldDelegate != this;
+  }
+  double max(double a, double b) {
+    if (a > b) {
+      return a;
+    } else {
+      return b;
+    }
   }
 }
+
