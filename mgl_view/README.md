@@ -1,15 +1,59 @@
 # mgl_view
 
-A  Flutter package to create tradition mongolion textview.
+An simple widget to render Mongolian text in a column style。
 
-## Getting Started
+一个可以竖排渲染传统蒙古文的小部件。
+
+# ✨✨ How to use 如何使用
+
+example:
+
+```dart
+ Container(
+              width: 360,
+              height:200,
+              child: MView(' ᠮᠣᠩᠭᠤᠯ ᠦᠠᠳᠣᠰᠣᠳᠠᠠ ᠤ ᠠᠯᠳᠠᠷᠳᠣ ᠤᠷᠳᠣ ᠪᠠᠭᠠᠳᠣᠷᠯᠢᠬ ᠲᠣᠣᠯ'
+                  'ᠢ ︽ᠵᠠᠩᠭᠠᠷ︾ ᠤᠨ ᠤᠬ	ᠮᠠᠲ᠋ᠧᠷᠢᠶᠠᠯ ᠤᠨ ᠡᠮᠬᠢᠣᠠᠬᠡᠯ᠃ '
+                  'ᠰᠢᠠᠵᠢᠶᠠᠩ ᠤᠨ ᠦᠢᠷᠠᠣᠠ ᠮᠣᠩᠭᠤᠯᠴᠣᠣᠠ ᠤᠨ ᠲᠣᠮᠳᠠ ᠠᠴᠠ ᠴᠣᠬᠯᠠ'
+                  'ᠭᠤᠯᠵᠣ᠂	20 ᠳ᠋ᠣᠭᠠᠷ ᠵᠠᠭᠤᠠ ᠤ ᠨᠠᠶᠠᠭᠠᠣᠠ ᠤᠠ ᠤ ᠡᠴᠣᠰ ᠶᠠᠷᠠᠬᠡᠣᠠ'
+                  ' ᠤᠠ ᠤ ᠡᠬᠢ ᠪᠠᠷ ᠰᠢᠠᠵᠢᠶᠠᠩ ᠤᠨ ᠠᠷᠠᠣᠠ ᠤᠨ	ᠬᠡᠪᠯᠠᠯ ᠤᠨ ᠬᠤᠷᠢᠶ᠎ᠠ ᠲᠣᠳ'
+                  'ᠣ ᠦᠰᠦᠭ ᠢᠶᠠᠷ ᠵᠠᠯᠭᠠᠭ᠎ᠠ ᠪᠠᠷ ᠬᠡᠪᠯᠠᠭᠦᠯᠪᠠ᠃ ᠨᠠᠶᠢᠳᠠ 12 ᠲᠠᠪᠳᠠᠷ᠂ 137	ᠪᠦ'
+                  'ᠯᠦᠭ᠂ 17 ᠲᠦᠮᠠ ᠭᠠᠷᠣᠢ ᠮᠦᠷ ᠲᠠᠢ᠃ 1979 ᠤᠠ ᠳᠤ ᠰᠢᠠᠵᠢᠶᠠᠩ ᠤᠨ ᠦᠢᠭᠤᠷ'
+                  ' ᠤᠨ ᠦᠪᠠᠷᠳᠠᠬᠡᠠ	ᠵᠠᠰᠠᠬᠤ ᠤᠷᠣᠠ ︽ᠵᠠᠩᠭᠠᠷ︾ ᠢ ᠴᠣᠬᠯᠠᠭᠤᠯᠵᠣ ᠡᠮᠬ'
+                  'ᠢᠣᠠᠬᠡᠭᠦ ᠤᠳᠣᠷᠢᠣᠠᠬᠤ ᠲᠣᠭᠤᠢᠢᠯᠠᠩ ᠪᠠᠶᠢᠭᠤᠯᠵᠣ᠂ ᠵᠣᠬᠢᠶᠠᠠ	ᠪᠠᠶᠢ'
+                  'ᠭᠤᠯᠣᠯᠳᠠ ᠲᠠᠢ᠂ ᠲᠦᠯᠣᠪᠯᠠᠬᠡ ᠲᠠᠢ ᠴᠣᠬᠯᠠᠭᠤᠯᠵᠣ ᠡᠮᠬᠢᠣᠠᠬᠡᠭᠦ ᠠᠵᠢ'
+                  'ᠯ ᠢᠶᠠᠨ ᠡᠬᠢᠯᠠᠭᠦᠯᠣᠭ᠍ᠰᠠᠠ ᠪᠠᠶᠢᠨ᠎ᠠ᠃	ᠠᠷᠪᠠᠭᠠᠣᠠ ᠵᠢᠯ ᠤᠨ ᠴᠢᠷᠮ'
+                  'ᠠᠶᠢᠯᠭ᠎ᠠ ᠪᠠᠷ ᠲᠠᠮᠵᠢᠭᠠᠣᠠ᠂ ᠰᠢᠠᠵᠢᠶᠠᠩ ᠤᠷᠣᠠ ᠢᠶᠠᠷ 100 ᠭᠠᠷᠣᠢ ᠵᠠ'
+                  'ᠩᠭᠠᠷᠴᠢ	ᠬᠠᠶᠢᠯᠠᠬᠰᠠᠠ ︽ᠵᠠᠩᠭᠠᠷ︾ ᠤᠨ 157 ᠪᠦᠯᠦᠭ ︵187 ᠰᠢᠩᠬᠡᠬᠡᠯᠳ'
+                  'ᠠ ᠶᠢᠨ ᠪᠦᠰᠠ︶᠂ 20 ᠭᠠᠷᠣᠢ ᠲᠦᠮᠠᠠ	ᠮᠦᠷ ᠪᠠᠭᠠᠳᠣᠷᠯᠢᠬ ᠲᠣᠣᠯᠢ ᠴᠣᠬᠯᠠ'
+                  'ᠭᠤᠯᠣᠬᠰᠠᠠ ᠪᠠᠶᠢᠨ᠎ᠠ᠃ ︽ᠡᠮᠬᠢᠣᠠᠬᠡᠯ︾ ᠳᠤ ᠭᠤᠣᠯ ᠵᠣᠬᠢᠶᠠᠯ ᠠᠴᠠ ᠭ'
+                  'ᠠᠳᠠᠨ᠎ᠠ	᠂ ︽ᠵᠠᠩᠭᠠᠷ︾ ᠲᠤ ᠢᠯᠠᠷᠡᠭᠰᠠᠠ ᠪᠠᠭᠠᠳᠣᠷ ᠭᠦᠮᠣᠰ ᠤᠨ ᠤᠠ ᠤ'
+                  ' ᠭᠦᠰᠣᠨᠣᠭ᠍ᠳᠣ᠂ ᠬᠠᠮᠢᠶ᠎ᠠ ᠪᠦᠭᠦᠢ ᠲᠣᠮᠤᠬ	ᠦᠯᠢᠬᠡᠷ᠂ ᠵᠠᠩ ᠠᠭᠠᠯᠢ᠂ ᠵᠠ'
+                  'ᠩᠭᠠᠷᠴᠢ ᠶᠢᠨ ᠲᠣᠪᠴᠢ ᠲᠠᠨᠢᠯᠴᠠᠭᠤᠯᠭ᠎ᠠ ᠵᠢᠴᠢ ᠬᠠᠮᠢᠶ᠎ᠠ ᠪᠦᠭᠦᠢ ᠬᠡ'
+                  'ᠷᠠᠯ ᠵᠢᠷᠤᠬ᠂	ᠰᠢᠩᠬᠡᠬᠡᠯᠳᠠ ᠵᠠᠷᠬᠡ ᠪᠠᠶᠢᠨ᠎ᠠ᠃ 3 ᠲᠠᠪᠳᠠᠷ ᠨᠢ ᠤᠳᠣ ᠤᠳ'
+                  'ᠠᠯ ᠦᠬᠡᠢ ᠬᠡᠪᠯᠠᠭᠦᠯᠭᠦ ᠬᠡᠵᠣ ᠪᠠᠶᠢᠨ᠎ᠠ᠃',alignment: AlignType.topRight,),
+            ),
+```
 
 
-This project is a starting point for a Dart
-[package](https://flutter.io/developing-packages/),
-a library module containing code that can be shared easily across
-multiple Flutter or Dart projects.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+
+
+[![img](https://github.com/suyie001/mgl_view/blob/master/mgl_view/mgl_view.png)](https://github.com/suyie001/mgl_view/blob/master/mgl_view/mgl_view.png)
+
+# ✨✨ 支持的对齐方式
+
+For now， topCenter，topLeft，topRight is enable.
+
+目前只支持 顶部左对齐，顶部居中，顶部右对齐
+
+# ✨✨ 从哪儿下载蒙古字体?
+
+可以选择任意喜欢的字体,在内蒙古一般使用
+
+[蒙科立]: http://www.menksoft.com/site/alias__menkcms/2805/Default.aspx
+
+的比较多。
+
+
+
