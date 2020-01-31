@@ -151,9 +151,8 @@ class MTextPainter extends CustomPainter {
   }
 
   @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-
-    return oldDelegate != this;
+  bool shouldRepaint(MTextPainter oldDelegate) {
+    return oldDelegate.content != content || oldDelegate.textStyle != textStyle || oldDelegate.alignment != alignment;
   }
   double max(double a, double b) {
     if (a > b) {
